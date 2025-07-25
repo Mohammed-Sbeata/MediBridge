@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MediBridge 🌍💊
 
-## Getting Started
+MediBridge is a secure, full-stack healthcare platform that connects local doctors in Gaza with international medical consultants to support the management of complex and chronic patient cases. Built as part of the **Hack for Gaza 2025** hackathon, MediBridge aims to bridge the healthcare gap in crisis zones through meaningful collaboration and technology.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌟 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🔐 **Secure user authentication** (local and international roles)
+- 📁 **Patient case creation** with ability to upload images, PDFs, or voice notes (image-to-text, speech-to-text supported)
+- 👥 **Multi-disciplinary team collaboration** (MDT) on cases
+- 💬 **Real-time chat** for case discussion
+- 🧠 **Automated MDT templates** to ease documentation burden
+- 🩺 **Profile system** for doctors and consultants
+- 📲 **Invitation-based consultant matching** by specialty
+- 🔒 **End-to-end privacy and access control**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧑‍⚕️ Target Users
 
-## Learn More
+- **Local Doctors in Gaza**: Add cases, request international help, and collaborate with local colleagues.
+- **International Consultants**: Join ongoing cases by invitation to provide remote medical support.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend**: React.js + Next.js + TypeScript  
+- **Backend**: Node.js + Express  
+- **Database**: MongoDB  
+- **Other Tools**:  
+  - Notion (team collaboration)  
+  - DrawSQL (database schema)  
+  - Lovable.so (UI/UX design)  
+  - Cursor (coding IDE)  
+  - Agemo Codewords (backend support)  
 
-## Deploy on Vercel
+## 🚀 Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/Mohammed-Sbeata/Medibridge.git
+   cd medibridge
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ❤️ Special Thanks
+
+
+To Deen Developers and Gaza Sky Geeks for organizing this impactful hackathon and providing a space to innovate for a better tomorrow.
+
+
+## 📄 License
+
+
+This project was created for humanitarian and educational purposes during Hack for Gaza 2025. Licensing to be determined.
+
+## 🤝 Team
+
+
+Built with love by an international team during Hack for Gaza 2025:
+
+Zahra(Team Lead – UK)
+
+Lugene ,Salma, , Anjuman
+
+Mohammed Sbeita (Palestine – Full-stack Contributor)
