@@ -1,0 +1,45 @@
+{
+  "name": "medibridge",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "prisma:seed": "NODE_OPTIONS='--loader ts-node/esm' ts-node --esm prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "NODE_OPTIONS='--loader ts-node/esm' ts-node --esm prisma/seed.ts"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
+    "@prisma/client": "6.12.0",
+    "@supabase/supabase-js": "^2.52.0",
+    "bcryptjs": "^3.0.2",
+    "date-fns": "^4.1.0",
+    "next": "14.1.0",
+    "next-auth": "^4.24.11",
+    "prisma": "^6.12.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.60.0",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@netlify/plugin-nextjs": "^5.11.6",
+    "@types/bcryptjs": "^3.0.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}

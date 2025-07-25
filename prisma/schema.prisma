@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Specialty {
+  id             Int            @id @default(autoincrement())
+  name           String         @unique
+  requiredInMDTs MDTSpecialty[]
+  users          User[]         @relation("SpecialtyToUser")
+}
+
+model User {
+  id                             String          @id @default(cuid())
+  firstName                      String
+  lastName                       String
+  email                          String          @unique
+  password                       String
+  userType                       UserType
+  professionalRegistrationNumber String?
+  hospital                       String?
+  referralCode                   String?         @unique
+  createdAt                      DateTime        @default(now())
+  referredById                   String?
+  createdMDTs                    MDT[]           @relation("MDTCreator")
+  receivedInvites                MDTInvitation[] @relation("ReceivedInvites")
+  sentInvites                    MDTInvitation[] @relation("SentInvites")
+  messages                       Message[]       @relation("UserMessages")
+  referredBy                     User?           @relation("UserReferrals", fields: [referredById], references: [id])
+  referredUsers                  User[]          @relation("UserReferrals")
+  mdts                           MDT[]           @relation("MDTToUser")
+  specialties                    Specialty[]     @relation("SpecialtyToUser")
+
+  @@index([referredById])
+}
+
+model PatientProfile {
+  id             String       @id @default(cuid())
+  age            Int
+  gender         Gender
+  uniqueId       String       @unique
+  medicalHistory String
+  caseSummary    String
+  mdtId          String       @unique
+  medications    Medication[]
+  mdt            MDT          @relation(fields: [mdtId], references: [id])
+
+  @@index([mdtId])
+}
+
+model Medication {
+  id               String         @id @default(cuid())
+  name             String
+  dosage           String
+  patientProfileId String
+  patientProfile   PatientProfile @relation(fields: [patientProfileId], references: [id])
+
+  @@index([patientProfileId])
+}
+
+model MDT {
+  id                  String          @id @default(cuid())
+  name                String
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  creatorId           String
+  status              MDTStatus       @default(ACTIVE)
+  creator             User            @relation("MDTCreator", fields: [creatorId], references: [id])
+  invitations         MDTInvitation[]
+  requiredSpecialties MDTSpecialty[]
+  messages            Message[]
+  patientProfile      PatientProfile?
+  members             User[]          @relation("MDTToUser")
+
+  @@index([creatorId])
+}
+
+model MDTSpecialty {
+  id          String    @id @default(cuid())
+  mdtId       String
+  specialtyId Int
+  filled      Boolean   @default(false)
+  mdt         MDT       @relation(fields: [mdtId], references: [id])
+  specialty   Specialty @relation(fields: [specialtyId], references: [id])
+
+  @@unique([mdtId, specialtyId])
+  @@index([mdtId])
+  @@index([specialtyId])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  mdtId     String
+  mdt       MDT      @relation(fields: [mdtId], references: [id])
+  user      User     @relation("UserMessages", fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([mdtId])
+}
+
+model MDTInvitation {
+  id          String           @id @default(cuid())
+  mdtId       String
+  senderId    String
+  receiverId  String
+  status      InvitationStatus @default(PENDING)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  specialtyId Int?
+  mdt         MDT              @relation(fields: [mdtId], references: [id])
+  receiver    User             @relation("ReceivedInvites", fields: [receiverId], references: [id])
+  sender      User             @relation("SentInvites", fields: [senderId], references: [id])
+
+  @@unique([mdtId, receiverId])
+  @@index([mdtId])
+  @@index([senderId])
+  @@index([receiverId])
+}
+
+enum UserType {
+  LOCAL
+  EXTERNAL
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum MDTStatus {
+  ACTIVE
+  ARCHIVED
+  COMPLETED
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  CANCELLED
+}
